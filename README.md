@@ -12,10 +12,10 @@ Azurite McProxy is a secure intermediary layer that helps you connect to Minecra
 
 # ⚡ Install
 
-## Step 1 install package:
+## Step 1 download Azurite-McProxy:
 
 using:
-```pip install -r requirements.txt```
+```git clone https://github.com/Notkenftr/Azurite-McProxy```
 
 ## Step 2 config
 
