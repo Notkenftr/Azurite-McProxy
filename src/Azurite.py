@@ -127,7 +127,7 @@ def start():
                                                     , listen_port
                                                     , server_host
                                                     , server_port
-                                                    , buffer
+                                                    , buffer * 1024
                                                     , [access_control_allowIp_status, access_control_allowIp_list]
                                                     , [access_control_denyIp_status, access_control_denyIp_list]))
 
