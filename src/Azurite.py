@@ -47,7 +47,7 @@ def config_reload(interval=5):
         load_config()
         time.sleep(interval)
 
-def start(listen_host, listen_port, server_host, server_port, buffer):
+def proxy(listen_host, listen_port, server_host, server_port, buffer):
     proxy = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     proxy.bind((listen_host,listen_port))
     proxy.listen(5)
@@ -63,9 +63,8 @@ def start(listen_host, listen_port, server_host, server_port, buffer):
                 print(f"[Azurite] {e}")
         threading.Thread(target=handle, args=(clientSock, server_host,server_port, buffer)).start()
 
-if __name__ == '__main__':
+def start():
     load_config()
-
 
     listen_host = config.get("forward").get("listen_address")
     listen_port = config.get("forward").get("listen_port")
@@ -75,6 +74,11 @@ if __name__ == '__main__':
 
     buffer = config.get("forward").get("buffer-size")
 
-    config_reload = threading.Thread(target=config_reload, daemon=True).start()
-    main = threading.Thread(target=start, args=(listen_host, listen_port, server_host, server_port, buffer))
+    configReload = threading.Thread(target=config_reload, args=(5), daemon=True)
+    main = threading.Thread(target=proxy, args=(listen_host, listen_port, server_host, server_port, buffer))
+
+    configReload.start()
+    main.start()
+
+
 
