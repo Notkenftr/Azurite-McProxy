@@ -48,6 +48,19 @@ def config_reload(interval=5):
         time.sleep(interval)
 
 def proxy(listen_host, listen_port, server_host, server_port, buffer, alc_allowIp, alc_denyIp):
+    """
+    Start a TCP proxy that listens for incoming client connections and forwards traffic
+    to a specified server, while applying optional IP allow/deny rules.
+
+    :param listen_host: The host/IP address where the proxy will listen (e.g., "0.0.0.0").
+    :param listen_port: The port number where the proxy will listen for client connections.
+    :param server_host: The target server's host/IP address to forward traffic to.
+    :param server_port: The target server's port number to forward traffic to.
+    :param buffer: The buffer size (in bytes) for reading and forwarding data.
+    :param alc_allowIp: A list of allowed client IPs. Only these IPs can connect if not empty.
+    :param alc_denyIp: A list of denied client IPs. Any IPs in this list will be blocked.
+    :return: None. The function runs continuously until terminated.
+    """
     proxy = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     proxy.bind((listen_host,listen_port))
     proxy.listen(5)
@@ -72,6 +85,14 @@ def proxy(listen_host, listen_port, server_host, server_port, buffer, alc_allowI
         threading.Thread(target=handle, args=(clientSock, server_host, server_port, buffer)).start()
 
 def start():
+    """
+    Entry point to initialize and start the proxy service.
+
+    This function sets up the listening socket, applies access control rules
+    (allow/deny IP), and begins handling client connections.
+
+    :return: None. Runs indefinitely until manually stopped.
+    """
     #load config
     load_config()
 
