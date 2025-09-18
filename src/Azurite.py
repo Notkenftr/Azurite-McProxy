@@ -47,7 +47,13 @@ def config_reload(interval=5):
         load_config()
         time.sleep(interval)
 
-def proxy(listen_host, listen_port, server_host, server_port, buffer, alc_allowIp, alc_denyIp):
+def proxy(listen_host,
+          listen_port,
+          server_host,
+          server_port,
+          buffer,
+          alc_allowIp: list,
+          alc_denyIp: list):
     """
     Start a TCP proxy that listens for incoming client connections and forwards traffic
     to a specified server, while applying optional IP allow/deny rules.
@@ -62,7 +68,8 @@ def proxy(listen_host, listen_port, server_host, server_port, buffer, alc_allowI
     :return: None. The function runs continuously until terminated.
     """
     proxy = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    proxy.bind((listen_host,listen_port))
+    proxy.bind((listen_host,
+                listen_port))
     proxy.listen(5)
     print(f"[Azurite] Listening on {listen_host}:{listen_port} → {server_host}:{server_port}")
 
@@ -82,7 +89,10 @@ def proxy(listen_host, listen_port, server_host, server_port, buffer, alc_allowI
             # alc_denyIp[1] contains the blocked IPs.
             clientSock.close()
             continue
-        threading.Thread(target=handle, args=(clientSock, server_host, server_port, buffer)).start()
+        threading.Thread(target=handle, args=(clientSock,
+                                              server_host,
+                                              server_port,
+                                              buffer)).start()
 
 def start():
     """

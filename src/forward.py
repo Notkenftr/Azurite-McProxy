@@ -20,7 +20,10 @@
 #OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 #SOFTWARE.
 
-def forward(src, dst, BUFFER_SIZE, direction="C→S"):
+def forward(src,
+            dst,
+            BUFFER_SIZE,
+            direction="C→S"):
     """
     Forward data between two sockets.
 

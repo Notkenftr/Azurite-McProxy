@@ -26,7 +26,10 @@ from threading import Thread
 
 from src.forward import forward
 
-def handle(client_sock, remote_host, remote_port, buffer):
+def handle(client_sock,
+           remote_host,
+           remote_port,
+           buffer):
     """
     Handle a client connection and forward traffic to a remote server.
     :param client_sock: client connection socket
