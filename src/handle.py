@@ -28,6 +28,7 @@ from src.forward import forward
 
 def handle(client_sock, remote_host, remote_port, buffer):
     try:
+        # Create socket to connect to the remote server
         serverSock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         serverSock.connect((remote_host,remote_port))
 
@@ -42,5 +43,11 @@ def handle(client_sock, remote_host, remote_port, buffer):
         clientToServer.join()
         serverToClient.join()
     finally:
-        clientToServer.close()
-        serverToClient.close()
+        try:
+            client_sock.close()
+        except:
+            pass
+        try:
+            serverSock.close()
+        except:
+            pass

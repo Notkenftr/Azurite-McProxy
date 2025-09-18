@@ -23,9 +23,12 @@
 def forward(src, dst, BUFFER_SIZE, direction="C→S"):
     try:
         while True:
+            # Receive data from the source socket
             data = src.recv(BUFFER_SIZE)
             if not data:
-                break
+                break # Receive data from the source socket
+
+            # Send the received data to the destination socket
             dst.sendall(data)
             print(f"[Azurite] [{direction}] Forwarded {len(data)} bytes", flush=True)
     except (ConnectionResetError, BrokenPipeError):
