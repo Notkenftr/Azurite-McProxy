@@ -116,11 +116,11 @@ def start():
 
     buffer = config.get("forward").get("buffer-size")
 
-    access_control_allowIp_status = config.get("forward").get("acess-control").get("allow-ips").get("enable")
-    access_control_denyIp_status = config.get("forward").get("acess-control").get("deny-ips").get("enable")
+    access_control_allowIp_status = config.get("forward").get("access-control").get("allow-ips").get("enable")
+    access_control_denyIp_status = config.get("forward").get("access-control").get("deny-ips").get("enable")
 
-    access_control_allowIp_list = config.get("forward").get("acess-control").get("allow-ips").get("ip-list")
-    access_control_denyIp_list = config.get("forward").get("acess-control").get("deny-ips").get("ip-list")
+    access_control_allowIp_list = config.get("forward").get("access-control").get("allow-ips").get("ip-list")
+    access_control_denyIp_list = config.get("forward").get("access-control").get("deny-ips").get("ip-list")
 
     configReload = threading.Thread(target=config_reload, args=(5,), daemon=True) # auto reload config after 5s
     main = threading.Thread(target=proxy, args=(listen_host
