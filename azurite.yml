@@ -36,4 +36,12 @@ forward:
 
   buffer-size: 128 #128kb | recommed 128kb
 
+  acess-control:
+    allow-ips:
+      enable: false
+      ip-list: []
+    deny-ips:
+      enable: false
+      ip-list: []
+
 
