@@ -27,6 +27,14 @@ from threading import Thread
 from src.forward import forward
 
 def handle(client_sock, remote_host, remote_port, buffer):
+    """
+    Handle a client connection and forward traffic to a remote server.
+    :param client_sock: client connection socket
+    :param remote_host: target server address.
+    :param remote_port: target server port.
+    :param buffer: buffer size for forwarding.
+    :return:
+    """
     try:
         # Create socket to connect to the remote server
         serverSock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)

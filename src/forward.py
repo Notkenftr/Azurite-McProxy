@@ -21,6 +21,24 @@
 #SOFTWARE.
 
 def forward(src, dst, BUFFER_SIZE, direction="C→S"):
+    """
+    Forward data between two sockets.
+
+    Args:
+        src (socket.socket): The source socket to read data from.
+        dst (socket.socket): The destination socket to send data to.
+        BUFFER_SIZE (int): The maximum amount of data to read at once (bytes).
+        direction (str, optional): A string indicating the forwarding direction,
+            e.g. "C→S" for Client to Server or "S→C" for Server to Client.
+
+    Returns:
+        None
+
+    Raises:
+        ConnectionResetError: If the peer unexpectedly resets the connection.
+        BrokenPipeError: If the socket is closed and cannot send data.
+        Exception: For any other unexpected errors during forwarding.
+    """
     try:
         while True:
             # Receive data from the source socket
