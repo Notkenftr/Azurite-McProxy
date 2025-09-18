@@ -23,9 +23,8 @@
 
 import os.path
 
-
+baseDir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
 class path():
-    baseDir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
     @staticmethod
     def config():
         return os.path.join(baseDir, 'azurite.yml')
